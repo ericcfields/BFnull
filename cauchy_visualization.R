@@ -1,8 +1,14 @@
-#Create visualization and probability table for Cauchy distribution 
+#Create visualization and probability table for the Cauchy distribution 
 #used in default Bayes factor
 #
 #Author: Eric Fields
-#Version Date: 12 October 2024
+#Version Date: 22 February 2025
+
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
 
 library(ggplot2)
 

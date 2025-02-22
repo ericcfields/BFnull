@@ -2,7 +2,13 @@
 #for the independent samples design with equal sample sizes?
 #
 #Author: Eric Fields
-#Version Date: 29 December 2024
+#Version Date: 22 February 2025
+
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
 
 library(MBESS)
 library(BayesFactor)
@@ -27,6 +33,7 @@ effect_sizes <- seq(0, 1.0, 0.01)
 sample_sizes <- seq(3, 100, 1)
 
 max_CI <- 0 #initialize
+
 for (d in effect_sizes) {
   for (n in sample_sizes) {
     

@@ -1,7 +1,13 @@
 #Example of Bayes factor results with small effect
 #
 #Author: Eric Fields
-#Version Date: 5 December 2024
+#Version Date: 22 February 2025
+
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
 
 library(MBESS)
 library(BayesFactor)
@@ -45,11 +51,11 @@ n2 <- 40 #sample size in condition 2
 ################### FREQUENTIST T-TEST & DEFAULT BF ###################
 
 #Cohen's d effect size
-d <- (M2 - M1) / s
+mean_diff <- M2 - M1
+d <- mean_diff / s
 
 #frequentist t-test
 df <- n1 + n2 - 2
-mean_diff <- M2 - M1
 SE_diff <- sqrt( (s^2)/n1 + (s^2)/n2 )
 t <- mean_diff / SE_diff
 pval <- pt(abs(t), df, lower.tail=FALSE) * 2
@@ -58,9 +64,9 @@ pval <- pt(abs(t), df, lower.tail=FALSE) * 2
 CI80 <- d.indsample.CI(d, n1, n2, conf.level=0.80)
 CI95 <- d.indsample.CI(d, n1, n2, conf.level=0.95)
 
-#Default Bayes factor
-cauchy_scale <- sqrt(2) / 2
-lnBF <- ttest.tstat(t, n1, n2, rscale=cauchy_scale)$bf #ttest.stat function reports natural log of the BF
+#Bayes factor
+H1_scale <- sqrt(2) / 2
+lnBF <- ttest.tstat(t, n1, n2, rscale=H1_scale)$bf #ttest.stat function reports natural log of the BF
 BF10 <- exp(lnBF) #BF in favor of alternative
 BF01 <- 1 / BF10 #BF in favor of null
 
@@ -99,6 +105,7 @@ L1 <- integrate(alt_likelihood_integrand, lower=lo, upper=hi, d=d, n1=n1, n2=n2)
 BF10_custom <- L1/L0
 BF01_custom <- L0/L1
 
+#report results
 cat(sprintf("\nCustom alternative"),
     sprintf("BF10 = %.2f", BF10_custom),
     sprintf("BF01 = %.2f", BF01_custom),

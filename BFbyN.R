@@ -1,7 +1,13 @@
-#Bayes factor by sample size with a given observed effect size
+#Bayes factor and confidence interval by sample size with a given observed effect size
 #
 #Author: Eric Fields
-#Version Date: 21 February 2025
+#Version Date: 22 February 2025
+
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
 
 library(BayesFactor)
 library(MBESS)
@@ -38,7 +44,9 @@ for (n in seq(5, 1000)) {
   BF10 <- exp(lnBF) #BF in favor of alternative
   BF01 <- 1 / BF10 #BF in favor of null
   
+  #Add results to table
   sim_results[as.character(n), "BF10"] <- BF10
   sim_results[as.character(n), "CI_L"] <- CI95[1]
   sim_results[as.character(n), "CI_U"] <- CI95[2]
+  
 }

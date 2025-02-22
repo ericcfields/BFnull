@@ -1,7 +1,13 @@
 #CI for Cohen's d by sample size in independent samples and paired samples designs
 #
 #Author: Eric Fields
-#Version Date: 19 October 2024
+#Version Date: 22 February 2025
+
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
 
 library(MBESS)
 
@@ -36,7 +42,10 @@ d.pairedsample.CI <- function(dav, N, r, conf.level=0.95) {
 #Sample sizes
 ns <- c(20, 30, 40, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 2000, 5000, 10000)
 
+#Initialize data frame
 CI_table <- data.frame()
+
+#Calculate CIs for each sample size
 for (n in ns) {
   
   CI <- d.indsample.CI(0.0, n, n)
@@ -53,4 +62,5 @@ for (n in ns) {
   
 }
 
+#Output results
 write.csv(CI_table, file.path("output", "CI_width.csv"))

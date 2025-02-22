@@ -3,6 +3,12 @@
 #Author: Eric Fields
 #Version Date: 22 February 2025
 
+#Copyright (c) 2025, Eric Fields
+#This code is free and open source software made available under the terms 
+#of the CC BY 4.0 license
+#https://creativecommons.org/licenses/by/4.0/
+
+
 library(BayesFactor)
 
 proj_dir <- "C:/Users/fieldsec/OneDrive - Westminster College/Documents/ECF/Research/Bayes factor simulations"
@@ -19,20 +25,18 @@ pop_d <- c(0.0, 0.2, 0.5, 0.8, 1.2) #Population Cohen's d
 ns <- c(20, 40, 100, 250, 400) #Sample size in each group
 
 #Test parameters
-alpha <- 0.05 #Alpha level for frequentist test
+alpha <- 0.05 #Alpha level for frequentist t-test
 H1_scales <- c(0.2, 0.4, sqrt(2)/2) #Scale factor for BF H1 distribution ("default" is sqrt(2)/2)
 
 
 ################### RUN SIMULTAIONS ###################
-
-start_time <- Sys.time()
 
 for (n in ns) {
 
   #Initialize results data frame
   sim_results <- data.frame()
   
-  #Initialize BF and p-values arrays
+  #Initialize BF and p-value arrays
   bf <- array(NaN, dim=c(n_sim, length(pop_d), length(H1_scales)))
   p_vals <- array(NaN, dim=c(n_sim, length(pop_d)))
   
@@ -75,4 +79,3 @@ for (n in ns) {
 
 }
 
-end_time <- Sys.time()
